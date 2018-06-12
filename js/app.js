@@ -23,10 +23,6 @@ class Character{
         }
     }
 
-    update(){
-        console.log(this.y);
-    }
-
     render(){
         ctx.drawImage(this.sprite, this.x, this.y);
     }
@@ -88,7 +84,7 @@ class Player extends Character{
 
 
 
-// Now instantiate your objects.263421736
+// Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
