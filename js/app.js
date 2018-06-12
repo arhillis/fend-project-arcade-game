@@ -75,7 +75,7 @@ class Player extends Character{
 
     checkCollision(){
         let bugX = Math.ceil(allEnemies[0].x) + 60;                
-        return bugX >= this.x && bugX <= this.x + 100;
+        return bugX >= this.x && bugX <= this.x + 100 && this.y === 40;
     }
 
     update(){
