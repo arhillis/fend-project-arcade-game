@@ -30,6 +30,8 @@ class Character{
     render(){
         ctx.drawImage(this.sprite, this.x, this.y);
     }
+
+  
 }
 // Enemies our player must avoid
 const Enemy = function(x, y) {
@@ -41,7 +43,7 @@ const Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.random() * 10;
+    this.speed = Math.random();
 };
 
 // Update the enemy's position, required method for game
@@ -70,9 +72,23 @@ class Player extends Character{
     constructor(x, y, src){
         super(x, y, src);
     }
+
+    checkCollision(){
+        let bugX = Math.ceil(allEnemies[0].x) + 60;                
+        return bugX >= this.x && bugX <= this.x + 100;
+    }
+
+    update(){
+        if(this.checkCollision()){
+            this.x = 200;
+            this.y = 295; 
+        }   
+    }
 }
 
-// Now instantiate your objects.
+
+
+// Now instantiate your objects.263421736
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
