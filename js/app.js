@@ -90,7 +90,14 @@ class Player extends Character{
         if(this.checkCollision()){
             this.x = 200;
             this.y = 295; 
-        }   
+        }  
+        if(this.y === -45){
+            setTimeout( () => {
+                alert("You made it!");
+                this.x = 200;
+                this.y = 295; 
+            }, 10);
+        } 
     }
 }
 
