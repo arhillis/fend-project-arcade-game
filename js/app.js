@@ -39,7 +39,7 @@ const Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.random();
+    this.speed = Math.random() * 5;
 };
 
 // Update the enemy's position, required method for game
@@ -70,18 +70,20 @@ class Player extends Character{
     }
 
     checkCollision(){
-        let bug1X = Math.ceil(allEnemies[0].x) + 60; 
-        let bug2x = Math.ceil(allEnemies[1].x) + 60;
-        let bug3x = Math.ceil(allEnemies[2].x) + 60;
-
         //First row: bug.y = 60 and player.y = 40
         //Second row: player.y = 125
         //Third row: player.y = 210
         //i is the index of the player on a row f(i) = 40 + (85 * i)
-                     
-        return (bug1X >= this.x && bug1X <= this.x + 100 && this.y === 40) 
-        || (bug2x >= this.x && bug2x <= this.x + 100 && this.y === 125)
-        || (bug3x >= this.x && bug3x <= this.x + 100 && this.y === 210);
+
+        for(let bug of allEnemies){
+            let bugX = Math.ceil(bug.x) + 60;            
+
+            if(bugX >= this.x && bugX <= this.x + 100 && bug.y === this.y + 20){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     update(){
