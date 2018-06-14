@@ -7,22 +7,6 @@ class Character{
         this.sprite.src = src;
     }
 
-    handleInput(keyCode){
-        switch(keyCode){
-            case 'up':
-                this.y -= (this.y > 0) ? 85 : 0;
-                break;
-            case 'down':
-                this.y += (this.y < 300) ? 85 : 0;
-                break;
-            case 'right':
-                this.x += (this.x < 400) ? 100 : 0;
-                break;
-            default:
-                this.x -= (this.x > 0) ? 100 : 0;
-        }
-    }
-
     render(){
         ctx.drawImage(this.sprite, this.x, this.y);
     }
@@ -54,31 +38,6 @@ class Enemy extends Character{
     }
 }
 
-/*
-const Enemy = function(x, y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
-    this.speed = Math.random() * 5;
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-   
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-*/
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -86,6 +45,22 @@ Enemy.prototype.render = function() {
 class Player extends Character{
     constructor(x, y, src){
         super(x, y, src);
+    }
+    
+    handleInput(keyCode){
+        switch(keyCode){
+            case 'up':
+                this.y -= (this.y > 0) ? 85 : 0;
+                break;
+            case 'down':
+                this.y += (this.y < 300) ? 85 : 0;
+                break;
+            case 'right':
+                this.x += (this.x < 400) ? 100 : 0;
+                break;
+            default:
+                this.x -= (this.x > 0) ? 100 : 0;
+        }
     }
 
     checkCollision(){
