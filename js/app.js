@@ -7,6 +7,46 @@ class Character{
         this.sprite.src = src;
     }
 
+    render(){
+        ctx.drawImage(this.sprite, this.x, this.y);
+    }
+
+  
+}
+// Enemies our player must avoid
+
+class Enemy extends Character{
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
+    constructor(x, y, src){
+        super(x, y, src);
+        this.speed = Math.random() * 250;        
+    }
+
+    update(dt){
+         // You should multiply any movement by the dt parameter
+        // which will ensure the game runs at the same speed for
+        // all computers.
+        if(this.x < 500){        
+            this.x += this.speed * dt;
+        }else{
+            this.x = -100;
+    }
+    }
+}
+
+// Now write your own player class
+// This class requires an update(), render() and
+// a handleInput() method.
+
+class Player extends Character{
+    constructor(x, y, src){
+        super(x, y, src);
+    }
+    
     handleInput(keyCode){
         switch(keyCode){
             case 'up':
@@ -21,52 +61,6 @@ class Character{
             default:
                 this.x -= (this.x > 0) ? 100 : 0;
         }
-    }
-
-    render(){
-        ctx.drawImage(this.sprite, this.x, this.y);
-    }
-
-  
-}
-// Enemies our player must avoid
-const Enemy = function(x, y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
-    this.speed = Math.random() * 5;
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    if(this.x < 500){        
-        this.x += this.speed;
-    }else{
-        this.x = -100;
-    }
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-class Player extends Character{
-    constructor(x, y, src){
-        super(x, y, src);
     }
 
     checkCollision(){
@@ -90,7 +84,14 @@ class Player extends Character{
         if(this.checkCollision()){
             this.x = 200;
             this.y = 295; 
-        }   
+        }  
+        if(this.y === -45){
+            setTimeout( () => {
+                alert("You made it!");
+                this.x = 200;
+                this.y = 295; 
+            }, 10);
+        } 
     }
 }
 
@@ -103,7 +104,7 @@ let allEnemies = [];
 let player = new Player(200, 295, "images/char-cat-girl.png");
 
 for(let i = 0; i < 3; i++){
-    let bug = new Enemy(-100, 60 + (85 * i));
+    let bug = new Enemy(-100, 60 + (85 * i), "images/enemy-bug.png");
     allEnemies.push(bug);
 }
 
