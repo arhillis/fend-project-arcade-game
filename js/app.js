@@ -8,7 +8,7 @@ class Character{
     }
 
     render(){
-        ctx.drawImage(this.sprite, this.x, this.y);
+        ctx.drawImage(this.sprite, this.x, this.y);//I ditched the Resources.get method because I thought this way would be a lot simpler.
     }
 
   
@@ -69,6 +69,8 @@ class Player extends Character{
         //Third row: player.y = 210
         //i is the index of the player on a row f(i) = 40 + (85 * i)
 
+
+        //Looping through all the enemies and seeing if the player is bumping into any of them
         for(let bug of allEnemies){
             let bugX = Math.ceil(bug.x) + 60;            
 
@@ -85,6 +87,8 @@ class Player extends Character{
             this.x = 200;
             this.y = 295; 
         }  
+
+        //If the player is at the water
         if(this.y === -45){
             setTimeout( () => {
                 alert("You made it!");
